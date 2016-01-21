@@ -50,7 +50,7 @@ namespace boost {
                     return icu::TimeZone::createDefault();
                 }
                 else {
-                    return icu::TimeZone::createTimeZone(time_zone.c_str());
+                    return icu::TimeZone::createTimeZone(UnicodeString(time_zone.c_str()));
                 }
             }
 

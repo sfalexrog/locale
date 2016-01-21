@@ -240,7 +240,7 @@ namespace locale {
                 sdf->toPattern(tmp);
             }
             else {
-                tmp=alt;
+                tmp=icu::UnicodeString(alt);
             }
             return tmp;
 
@@ -250,13 +250,13 @@ namespace locale {
         {
             switch(c) {
             case 'a': // Abbr Weekday
-                return "EE";
+                return icu::UnicodeString("EE");
             case 'A': // Full Weekday
-                return "EEEE";
+                return icu::UnicodeString("EEEE");
             case 'b': // Abbr Month
-                return "MMM";
+                return icu::UnicodeString("MMM");
             case 'B': // Full Month
-                return "MMMM";
+                return icu::UnicodeString("MMMM");
             case 'c': // DateTile Full
                 {
                     if(cache)
@@ -270,37 +270,37 @@ namespace locale {
             //  case 'C': // Century -> 1980 -> 19
             //  retur
             case 'd': // Day of Month [01,31]
-                return "dd";
+                return icu::UnicodeString("dd");
             case 'D': // %m/%d/%y
-                return "MM/dd/YY";
+                return icu::UnicodeString("MM/dd/YY");
             case 'e': // Day of Month [1,31]
-                return "d";
+                return icu::UnicodeString("d");
             case 'h': // == b
-                return "MMM";
+                return icu::UnicodeString("MMM");
             case 'H': // 24 clock hour 00,23
-                return "HH";
+                return icu::UnicodeString("HH");
             case 'I': // 12 clock hour 01,12
-                return "hh";
+                return icu::UnicodeString("hh");
             case 'j': // day of year 001,366
-                return "D";
+                return icu::UnicodeString("D");
             case 'm': // month as [01,12]
-                return "MM";
+                return icu::UnicodeString("MM");
             case 'M': // minute [00,59]
-                return "mm";
+                return icu::UnicodeString("mm");
             case 'n': // \n
-                return "\n";
+                return icu::UnicodeString("\n");
             case 'p': // am-pm
-                return "a";
+                return icu::UnicodeString("a");
             case 'r': // time with AM/PM %I:%M:%S %p
-                return "hh:mm:ss a";
+                return icu::UnicodeString("hh:mm:ss a");
             case 'R': // %H:%M
-                return "HH:mm";
+                return icu::UnicodeString("HH:mm");
             case 'S': // second [00,61]
-                return "ss";
+                return icu::UnicodeString("ss");
             case 't': // \t
-                return "\t";
+                return icu::UnicodeString("\t");
             case 'T': // %H:%M:%S
-                return "HH:mm:ss";
+                return icu::UnicodeString("HH:mm:ss");
 /*          case 'u': // weekday 1,7 1=Monday
             case 'U': // week number of year [00,53] Sunday first
             case 'V': // week number of year [01,53] Moday first
@@ -325,15 +325,15 @@ namespace locale {
                     );
                 }
             case 'y': // Year [00-99]
-                return "YY";
+                return icu::UnicodeString("YY");
             case 'Y': // Year 1998
-                return "YYYY";
+                return icu::UnicodeString("YYYY");
             case 'Z': // timezone
-                return "vvvv";
+                return icu::UnicodeString("vvvv");
             case '%': // %
-                return "%";
+                return icu::UnicodeString("%");
             default:
-                return "";
+                return icu::UnicodeString("");
             }
         }
 
@@ -352,24 +352,24 @@ namespace locale {
                         c=ftime[i];
                     }
                     if(escaped) {
-                        result+="'";
+                        result+=icu::UnicodeString("'");
                         escaped=false;
                     }
                     result+=strftime_to_icu_symbol(c,locale);
                 }
                 else if(c=='\'') {
-                        result+="''";
+                        result+=icu::UnicodeString("''");
                 }
                 else {
                     if(!escaped) {
-                        result+="'";
+                        result+=icu::UnicodeString("'");
                         escaped=true;
                     }
                     result+=c;
                 }
             }
             if(escaped)
-                result+="'";
+                result+=icu::UnicodeString("'");
             return result;
         }
         
